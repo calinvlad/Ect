@@ -1,0 +1,27 @@
+<ul *ngFor="let object of info; let hide = null">
+
+  <li>
+    {{object.name}}
+    <button (click)="hide ? hide = null : hide = object.children "
+    *ngIf="object.children">{{hide ? 'Show' : 'Hide'}}</button>
+    <span *ngIf="hide !== object.children">
+      <ul *ngFor="let children of object.children; let hide = null">
+      <li *ngIf="children.name && hide !== object.children">
+        {{children.name}}
+        <button (click)="hide ? hide = null : hide = children.children"
+        *ngIf="children.children">{{hide ? 'Show' : 'Hide'}}</button>
+      </li>
+        <span *ngIf="hide !== children.children">
+          <ul *ngFor="let childrenof of children.children; let hide = null">
+          <li *ngIf="childrenof.name">
+            {{childrenof.name}}
+            <button (click)="hide ? hide = null : hide = childrenof.children"
+            *ngIf="childrenof.children">{{hide ? 'Show' : 'Hide'}}</button>
+          </li>
+          <li *ngIf="childrenof.children && hide !== childrenof.children">{{childrenof.children}}</li>
+        </ul>
+        </span>
+      </ul>
+    </span>
+  </li>
+</ul>
